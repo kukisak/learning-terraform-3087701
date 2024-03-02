@@ -61,7 +61,7 @@ resource "aws_security_group_rule" "blog_everything_out" {
   protocol          = "-1" # allow all protocols
   cidr_blocks       = ["0.0.0.0/0"]
   to_port           = 0
-  type              = "engress"
+  type              = "egress"
 
   security_group_id = aws_security_group.blog.id
 }
