@@ -69,16 +69,22 @@ module "alb" {
 
   target_groups = {
     ex-instance = {
-      name_prefix      = "blog-"
-      protocol         = "HTTP"
-      port             = 80
-      target_type      = "instance"
+      name_prefix = "blog-"
+      protocol    = "HTTP"
+      port        = 80
+      target_type = "instance"
     }
   }
 
   tags = {
     Environment = "dev"
   }
+}
+
+resource "aws_lb_target_group_attachment" "test" {
+  target_group_arn = module.alb.target_groups["ex-instance"].arn
+  target_id        = aws_instance.blog.id
+  port             = 80
 }
 
 module "blog_sg" {
